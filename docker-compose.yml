@@ -1,0 +1,61 @@
+version: "3"
+services:
+  fnl-laravel-breeze:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fnl-laravel-breeze
+    ports:
+      - 808:80
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - fnl-laravel-breeze-db
+    environment:
+      APP_DEBUG: 'true'
+      APP_NAME: 'fnl.one | Laravel Breeze'
+      APP_ENV: 'local'
+      # Generate a new key and paste below
+      APP_KEY: 'base64:OoBYmwIIal8E8oeiX0oxZEx5/4V0/ZOa5nwsIwpcqQk='
+      LOG_LEVEL: 'debug'
+      APP_URL: 'http://172.28.1.1'
+      DB_CONNECTION: 'pgsql'
+      DATABASE_URL: 'pgsql://postgres:docker@pg:5432/postgres'
+    networks:
+      fnl-laravel-breeze:
+        ipv4_address: 210.81.9.1
+
+  fnl-laravel-breeze-db:
+    image: postgres:latest
+    ports:
+    - 2345:5432
+    volumes:
+      - jd_laravel_breeze_db_data:/var/lib/postgres
+    environment:
+      POSTGRES_PASSWORD: docker
+    container_name: fnl-laravel-breeze-db
+    networks:
+      fnl-laravel-breeze:
+        ipv4_address: 210.81.9.2
+
+#  redis:
+#    image: redis:alpine
+#    command: redis-server --requirepass docker
+#    ports:
+#      - 8379:6379
+#    volumes:
+#      - $PWD/redis-data:/var/lib/redis
+#    environment:
+#      - REDIS_REPLICATION_MODE=master
+#    networks:
+#      fnl-laravel-breeze:
+#        ipv4_address: 210.81.9.3
+
+volumes:
+  jd_laravel_breeze_db_data: {}
+networks:
+  fnl-laravel-breeze:
+    ipam:
+      driver: default
+      config:
+        - subnet: 210.81.0.0/16
