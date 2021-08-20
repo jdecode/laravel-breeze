@@ -36,6 +36,7 @@ RUN if [ "$BUILD" = "local" ] ; then a2ensite default-ssl.conf ; else ls -al ; f
 
 RUN if [ "$BUILD" = "local" ] ; then ls -al ; else composer install --no-dev ; fi
 RUN if [ "$BUILD" = "local" ] ; then ls -al ; else npm install --only=prod ; fi
+RUN if [ "$BUILD" = "local" ] ; then ls -al ; else npm run prod ; fi
 
 RUN if [ "$BUILD" = "local" ] ; then ls -al ; else sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf ; fi
 
