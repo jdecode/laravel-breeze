@@ -4,6 +4,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+          BUILD: 'local'
+          PORT: '80'
     container_name: fnl-laravel-breeze
     ports:
       - 808:80
@@ -20,7 +23,7 @@ services:
       LOG_LEVEL: 'debug'
       APP_URL: 'http://172.28.1.1'
       DB_CONNECTION: 'pgsql'
-      DATABASE_URL: 'pgsql://postgres:docker@pg:5432/postgres'
+      DATABASE_URL: 'pgsql://postgres:docker@fnl-laravel-breeze-db:5432/postgres'
     networks:
       fnl-laravel-breeze:
         ipv4_address: 210.81.9.1
