@@ -24,6 +24,7 @@ services:
       APP_URL: 'http://172.28.1.1'
       DB_CONNECTION: 'pgsql'
       DATABASE_URL: 'pgsql://postgres:docker@fnl-laravel-breeze-db:5432/postgres'
+      #SENTRY_DSN: ''
     networks:
       fnl-laravel-breeze:
         ipv4_address: 210.81.9.1
