@@ -30,13 +30,13 @@ RUN if [ "$BUILD" = "local" ] ; then a2ensite default-ssl.conf ; else ls -al ; f
 ### Since ENV VARs are setup in docker-compose.yml, so no need to have .env file
 ### .env.testing still might be required, depending on the configuration of phpunit.xml - enable it if needed
 
-RUN if [ "$BUILD" = "local" ] ; then ls -al ; else cp -r . /var/www/html/ ; fi
+COPY . /var/www/html
 
 #COPY . /var/www/html
 #RUN cp .env.example .env
 #RUN cp .env.example .env.testing
 
-RUN if [ "$BUILD" = "local" ] ; then ls -al ; else composer install --no-dev ; fi
+RUN if [ "$BUILD" = "local" ] ; then ls -al ; else composer install --no-dev -n --prefer-dist ; fi
 RUN if [ "$BUILD" = "local" ] ; then ls -al ; else npm install --only=prod ; fi
 RUN if [ "$BUILD" = "local" ] ; then ls -al ; else npm run prod ; fi
 
