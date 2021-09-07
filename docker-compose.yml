@@ -21,7 +21,7 @@ services:
       # Generate a new key and paste below
       APP_KEY: 'base64:OoBYmwIIal8E8oeiX0oxZEx5/4V0/ZOa5nwsIwpcqQk='
       LOG_LEVEL: 'debug'
-      APP_URL: 'http://172.28.1.1'
+      APP_URL: 'http://210.81.9.1'
       DB_CONNECTION: 'pgsql'
       DATABASE_URL: 'pgsql://postgres:docker@fnl-laravel-breeze-db:5432/postgres'
       #SENTRY_DSN: ''
