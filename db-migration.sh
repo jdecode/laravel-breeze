@@ -1,5 +1,5 @@
 #!/bin/bash
 
-php artisan migrate
+php artisan migrate --force
 
 apache2-foreground
