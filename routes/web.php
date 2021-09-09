@@ -31,6 +31,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/hello-world', function () {
     HelloWorld::dispatch();
+    die('This is a Hello World page!');
 })->name('hello-world');
 
 require __DIR__.'/auth.php';
