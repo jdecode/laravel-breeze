@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -40,6 +41,11 @@ class HelloWorld extends Command
     {
         Log::info('Hello World : Log Info!');
         Log::log('debug', 'Hello World : Log debug, using log method!');
+        $u = new User();
+        $u->name = 'Command Testing';
+        $u->email = rand() . '-command@testing.io';
+        $u->password = bcrypt('commandtesting');
+        $u->save();
         print('Hello World : print!');
         return 0;
     }
