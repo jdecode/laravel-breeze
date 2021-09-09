@@ -25,6 +25,14 @@ services:
       DB_CONNECTION: 'pgsql'
       DATABASE_URL: 'pgsql://postgres:docker@fnl-laravel-breeze-db:5432/postgres'
       #SENTRY_DSN: ''
+      #QUEUE_CONNECTION: ''
+      #QUEUE_FAILED_DRIVER: ''
+      #STACKKIT_CLOUD_TASKS_PROJECT: ''
+      #STACKKIT_CLOUD_TASKS_LOCATION: ''
+      #STACKKIT_CLOUD_TASKS_HANDLER: ''
+      #STACKKIT_CLOUD_TASKS_QUEUE: ''
+      #STACKKIT_CLOUD_TASKS_SERVICE_EMAIL: ''
+      #GOOGLE_APPLICATION_CREDENTIALS: ''
     networks:
       fnl-laravel-breeze:
         ipv4_address: 210.81.9.1
