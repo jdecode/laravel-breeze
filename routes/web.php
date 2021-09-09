@@ -2,6 +2,7 @@
 
 use App\Jobs\HelloWorld;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -31,6 +32,7 @@ Route::get('/dashboard', function () {
 
 Route::get('/hello-world', function () {
     HelloWorld::dispatch();
+    Log::info('Logging from web-rout');
     die('This is a Hello World page!');
 })->name('hello-world');
 
