@@ -1,4 +1,4 @@
-FROM jdecode/laravel-breeze-php8-pg-node:latest
+FROM jdecode/laravel-breeze-php8-pg-node:4
 
 
 # Refer ARG
