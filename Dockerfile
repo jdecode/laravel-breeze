@@ -15,7 +15,7 @@ ENV PORT=${PORT}
 
 # Create local SSL certificate (to allow HTTPS URLs on local)
 RUN if [ "$BUILD" = "local" ] ; then apt-get install -y ssl-cert ; else ls -al ; fi
-RUN if [ "$BUILD" = "local" ] ; then openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj  "/C=IN/ST=PB/L=MOH/O=FNL/CN=210.81.1.1" -keyout ./docker-ssl.key -out ./docker-ssl.pem -outform PEM ; else ls -al ; fi
+RUN if [ "$BUILD" = "local" ] ; then openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj  "/C=IN/ST=PB/L=MOH/O=FNL/CN=210.91.0.1" -keyout ./docker-ssl.key -out ./docker-ssl.pem -outform PEM ; else ls -al ; fi
 RUN if [ "$BUILD" = "local" ] ; then mv docker-ssl.pem /etc/ssl/certs/ssl-cert-snakeoil.pem ; else ls -al ; fi
 RUN if [ "$BUILD" = "local" ] ; then mv docker-ssl.key /etc/ssl/private/ssl-cert-snakeoil.key ; else ls -al ; fi
 
