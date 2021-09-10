@@ -38,7 +38,7 @@ Route::get('/hello-world', function () {
 
 Route::get('/sub-of-pub-for-cloud-run-deployment', function () {
     Log::info('Triggered via Pub Sub, when new revision is deployed on cloud run');
-    Log::log('debug', 'Debugging by logging');
+    Log::log('debug', 'Debugging by logging!');
     die('This is a pub-sub trigger page');
 })->name('sub-of-pub-for-cloud-run-deployment');
 
