@@ -32,8 +32,13 @@ Route::get('/dashboard', function () {
 
 Route::get('/hello-world', function () {
     HelloWorld::dispatch();
-    Log::info('Logging from web-rout');
+    Log::info('Logging from web-route');
     die('This is a Hello World page!');
 })->name('hello-world');
+
+Route::get('/sub-of-pub-for-cloud-run-deployment', function () {
+    Log::info('Triggered via Pub Sub, when new revision is deployed on cloud run');
+    die('This is a pub-sub trigger page');
+})->name('sub-of-pub-for-cloud-run-deployment');
 
 require __DIR__.'/auth.php';
