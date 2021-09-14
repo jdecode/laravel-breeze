@@ -47,7 +47,8 @@ steps:
           DB_DATABASE=Laravel_Breeze_B_DB_database:1,
           DB_USERNAME=Laravel_Breeze_B_DB_username:1,
           DB_PASSWORD=Laravel_Breeze_B_DB_password:1,
-          SENTRY_DSN=Laravel-Breeze-B-Sentry-DSN:1'
+          SENTRY_DSN=Laravel-Breeze-B-Sentry-DSN:1',
+        '--add-cloudsql-instances=${_CLOUD_SQL_CONNECTION_NAME}'
     ]
     id: Deploy
 images:
@@ -74,12 +75,10 @@ substitutions:
   _STACKKIT_CLOUD_TASKS_HANDLER: ''
   _STACKKIT_CLOUD_TASKS_QUEUE: ''
   _STACKKIT_CLOUD_TASKS_SERVICE_EMAIL: ''
+  _CLOUD_SQL_CONNECTION_NAME: ''
 
 tags:
   - gcp-cloud-build-deploy-cloud-run
   - gcp-cloud-build-deploy-cloud-run-managed
   - laravel-b
-
-
-
-
+  - laravel-j
