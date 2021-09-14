@@ -27,6 +27,7 @@ steps:
         '--region', '$_DEPLOY_REGION',
         '--platform', 'managed',
         '--memory', '256Mi',
+        '--timeout', '30',
         '--update-env-vars',
         '
           APP_ENV=${_APP_ENV},
@@ -51,6 +52,45 @@ steps:
         '--add-cloudsql-instances=${_CLOUD_SQL_CONNECTION_NAME}'
     ]
     id: Deploy
+
+  # Deploy Queue-Handler (using the same container image, but high RAM) to Cloud Run
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+        'beta',
+        'run',
+        'deploy',
+        '--allow-unauthenticated',
+        '${_CLOUD_RUN_SERVICE}-queue-handler',
+        '--image', '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/$_CLOUD_RUN_SERVICE:$COMMIT_SHA',
+        '--region', '$_DEPLOY_REGION',
+        '--platform', 'managed',
+        '--memory', '2Gi',
+        '--timeout', '100',
+        '--update-env-vars',
+        '
+          APP_ENV=${_APP_ENV},
+          APP_DEBUG=${_APP_DEBUG},
+          APP_NAME=${_APP_NAME},
+          DB_CONNECTION=${_DB_CONNECTION},
+          BUILD=${_BUILD},
+          QUEUE_CONNECTION=${_QUEUE_CONNECTION},
+          QUEUE_FAILED_DRIVER=${_QUEUE_FAILED_DRIVER},
+          STACKKIT_CLOUD_TASKS_PROJECT=${_STACKKIT_CLOUD_TASKS_PROJECT},
+          STACKKIT_CLOUD_TASKS_LOCATION=${_STACKKIT_CLOUD_TASKS_LOCATION},
+          STACKKIT_CLOUD_TASKS_HANDLER=${_STACKKIT_CLOUD_TASKS_HANDLER},
+          STACKKIT_CLOUD_TASKS_QUEUE=${_STACKKIT_CLOUD_TASKS_QUEUE},
+          STACKKIT_CLOUD_TASKS_SERVICE_EMAIL=${_STACKKIT_CLOUD_TASKS_SERVICE_EMAIL}',
+        '--update-secrets=
+          APP_KEY=Laravel_Breeze_B_APP_KEY:1,
+          DB_HOST=Laravel_Breeze_B_DB_host:2,
+          DB_DATABASE=Laravel_Breeze_B_DB_database:1,
+          DB_USERNAME=Laravel_Breeze_B_DB_username:1,
+          DB_PASSWORD=Laravel_Breeze_B_DB_password:1,
+          SENTRY_DSN=Laravel-Breeze-B-Sentry-DSN:1',
+        '--add-cloudsql-instances=${_CLOUD_SQL_CONNECTION_NAME}'
+    ]
+    id: Deploy
+
 images:
   - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/${_CLOUD_RUN_SERVICE}:$COMMIT_SHA'
 options:
