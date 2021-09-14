@@ -55,7 +55,7 @@ images:
 options:
   substitution_option: 'ALLOW_LOOSE'
 substitutions:
-  _CLOUD_RUN_SERVICE: 'laravel-b'
+  _CLOUD_RUN_SERVICE: 'laravel-j'
   _PLATFORM: 'managed'
   _SERVICE_NAME: 'laravel-b'
   _LABELS: ''
