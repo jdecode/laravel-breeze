@@ -89,7 +89,7 @@ steps:
           SENTRY_DSN=Laravel-Breeze-B-Sentry-DSN:1',
         '--add-cloudsql-instances=${_CLOUD_SQL_CONNECTION_NAME}'
     ]
-    id: Deploy
+    id: DeployQueueHandler
 
 images:
   - '$_GCR_HOSTNAME/$PROJECT_ID/$REPO_NAME/${_CLOUD_RUN_SERVICE}:$COMMIT_SHA'
